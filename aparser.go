@@ -56,7 +56,7 @@ func (p *AParser) Parse(args []string) (map[string]*string, error) {
 	return result, nil
 }
 
-func NewAParser(arguments []*Argument) *AParser {
+func NewAParser(arguments ...*Argument) *AParser {
 	ret := AParser{}
 	for _, argument := range arguments {
 		if argument.Mandatory == "" {
