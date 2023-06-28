@@ -5,31 +5,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-type Argument struct {
-	Flags []string
-
-	// Required 설정되면
-	//   - Default = nil
-	Required bool
-
-	Description string
-
-	// Default 설정되면
-	//   - Required = false
-	Default string
-
-	ConfigKey string
-
-	// Mandatory 설정되면
-	//  - Required = true
-	//  - Flags = nil
-	//  - Default = nil
-	//  - ConfigKey = nil
-	Mandatory string
-
-	EnvironmentKey string
-}
-
 type AParser struct {
 	arguments             []*Argument
 	essentials            []string

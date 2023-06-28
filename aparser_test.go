@@ -7,13 +7,7 @@ import (
 
 func TestNewAParser(t *testing.T) {
 	ret := NewAParser([]*Argument{
-		{
-			Flags:       []string{"language", "l"},
-			Required:    true,
-			Description: "언어를 설정한다.",
-			Default:     "ko",
-			Mandatory:   "",
-		},
+		NewRequiredArgument([]string{"language", "l"}, "언어를 설정한다."),
 	})
 
 	require.NotNil(t, ret)
@@ -21,10 +15,7 @@ func TestNewAParser(t *testing.T) {
 
 func TestMandatory(t *testing.T) {
 	ret := NewAParser([]*Argument{
-		{
-			Description: "언어를 설정한다.",
-			Mandatory:   "Language",
-		},
+		NewMandatoryArgument("Language", "언어를 설정한다."),
 	})
 
 	t.Run("pass", func(t *testing.T) {
@@ -39,10 +30,7 @@ func TestMandatory(t *testing.T) {
 
 func TestAliases(t *testing.T) {
 	ret := NewAParser([]*Argument{
-		{
-			Flags:       []string{"language", "l"},
-			Description: "언어를 설정한다.",
-		},
+		NewOptionalArgument([]string{"language", "l"}, "언어를 설정한다.", ""),
 	})
 
 	for _, tt := range []struct {
@@ -73,11 +61,7 @@ func TestAliases(t *testing.T) {
 
 func TestRequired(t *testing.T) {
 	ret := NewAParser([]*Argument{
-		{
-			Flags:       []string{"language", "l"},
-			Required:    true,
-			Description: "언어를 설정한다.",
-		},
+		NewRequiredArgument([]string{"language", "l"}, "언어를 설정한다."),
 	})
 
 	t.Run("pass", func(t *testing.T) {
@@ -94,11 +78,7 @@ func TestRequired(t *testing.T) {
 
 func TestDefault(t *testing.T) {
 	parser := NewAParser([]*Argument{
-		{
-			Flags:       []string{"language", "l"},
-			Description: "언어를 설정한다.",
-			Default:     "ko",
-		},
+		NewOptionalArgument([]string{"language", "l"}, "언어를 설정한다.", "ko"),
 	})
 
 	t.Run("default", func(t *testing.T) {
